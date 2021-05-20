@@ -1,0 +1,20 @@
+package com.example.demo;
+
+public class Snippet {
+	@GetMapping(value="/received")
+		public List<Message> getAllReceivedMessage(@RequestParam int receivedId)
+		{
+			return ms.inbox(receivedId);
+		}
+		@GetMapping(value="/sender")
+		public List<Message> getAllSenderMessage(@RequestParam int senderId)
+		{
+			return ms.sent(senderId);
+		}
+		
+		@PostMapping(value="/sendMessage")
+		public Message addUserMessage(@RequestBody Message m) {
+			return ms.sendMessage(m);
+		}
+}
+
