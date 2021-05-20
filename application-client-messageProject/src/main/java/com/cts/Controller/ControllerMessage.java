@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cts.Services.UserService;
@@ -93,6 +94,7 @@ public class ControllerMessage {
 			String listMess = userService.inbox(u.getId(), token);
 			if (listMess.equalsIgnoreCase("<ul><li></li></ul>")) {
 				mav.addObject("msg", "No Message in Inbox");
+				mav.setViewName("Inbox");
 				System.out.println("NO messages");
 				return mav;
 			}
@@ -107,6 +109,11 @@ public class ControllerMessage {
 
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logoutUser(HttpSession session) {
+		session.invalidate();
+		return "redirect:/login";
+	}
 	@RequestMapping(value = "/sentMessage", method = RequestMethod.GET)
 	public ModelAndView sentm(HttpSession session) {
 		ModelAndView mav = new ModelAndView();
@@ -122,6 +129,7 @@ public class ControllerMessage {
 			String listMess = userService.sentMess(u.getId(), token);
 			if (listMess.equalsIgnoreCase("<ul><li></li></ul>")) {
 				mav.addObject("msg", "No Message sent");
+				mav.setViewName("SentMessages");
 				System.out.println("NO messages");
 				return mav;
 			}
@@ -143,10 +151,10 @@ public class ControllerMessage {
 		return "SendMessages";
 	}
 
-	@RequestMapping(value = "/sendMessage", method = RequestMethod.POST)
-	public ModelAndView sendMessage(@RequestBody Message msg,  HttpSession session) {
+	@RequestMapping(value = "/send-message", method = RequestMethod.POST)	@ResponseBody
+	public ModelAndView sendMessage(@ModelAttribute Message msg,  HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println(msg);
+
 		if (session.getAttribute("user") == null) {
 			mav.setViewName("index");
 			return mav;
@@ -155,26 +163,10 @@ public class ControllerMessage {
 		User u = (User) session.getAttribute("user");
 		msg.setSenderid(u.getId());
 		userService.sendMessage(msg,token);
-		
 		mav.addObject("msg", "Message Sent");
 		mav.setViewName("SendMessages");
 		return mav;
-//		if (userService.login(u.getMobileNumber()) != null) {
-//			if (u != null) {
-//				if (u.getSenderMessage().size() == 0) {
-//					mav.addObject("msg", "No Message sent");
-//					System.out.println("NO messages");
-//					return mav;
-//				}
-//				mav.addObject("flist", userService.sentMessage(u));
-//				mav.setViewName("SentMessages");
-//				System.out.println("Some messages sent");
-//				return mav;
-//			} else {
-//				mav.setViewName("login");
-//				return mav;
-//			}
-//
-//		}
 	}
+
+	
 }

@@ -10,6 +10,7 @@
 <h1>Sent messages Page</h1>
 <ul id="sentmsgs">
 ${flist}
+${msg}
 </ul>
 </body>
 </html>

@@ -10,6 +10,7 @@
 <h1>User Choice Page</h1>
 <a href="/inbox" >Inbox</a><br>
 <a href="/sendMessage">Send Message</a><br>
-<a href="/sentMessage">Sent Message</a>
+<a href="/sentMessage">Sent Message</a><br>
+<a href="logout">Logout</a>
 </body>
 </html>

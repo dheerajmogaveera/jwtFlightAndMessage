@@ -11,6 +11,7 @@
 
 <ul id="inboxmessage">
 ${flist}
+${msg}
 </ul>
 </body>
 </html>

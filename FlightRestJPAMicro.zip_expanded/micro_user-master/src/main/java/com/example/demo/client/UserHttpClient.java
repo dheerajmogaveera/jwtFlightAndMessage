@@ -20,7 +20,8 @@ import com.example.demo.vo.JwtRequest;
 public interface UserHttpClient {
     @GetMapping("/")
     public String getHi(@RequestHeader(value = "Authorization", required = true) String authorizationHeader);
-
+    @GetMapping("/get-user-by-uname")
+    public User getUserByUname(@RequestHeader(value = "Authorization", required = true) String authorizationHeader, @RequestParam String uname);
     @PostMapping("/login")
    	public ResponseEntity<?> loginForToken(@RequestBody JwtRequest authenticationRequest);
     

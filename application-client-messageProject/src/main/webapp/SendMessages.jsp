@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>Send Messages Page</h1>
-<form action="/sendMessage" method="post">
+<form action="/send-message" method="post">
 Receiver Id:<input type="number" name="receiverid"/><br> 
 Message:<input type="text" name="description"/>
 <input type="submit" value="send"/>

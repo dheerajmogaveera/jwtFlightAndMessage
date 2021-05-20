@@ -59,6 +59,13 @@ public class Message {
 	}
 	
 	public Message(){}
+	
+	
+	public Message(String description, int receiverid) {
+		super();
+		this.description = description;
+		this.receiverid = receiverid;
+	}
 	public Message(String description, int receiverid, int senderid) {
 		this.description = description;
 		this.receiverid = receiverid;

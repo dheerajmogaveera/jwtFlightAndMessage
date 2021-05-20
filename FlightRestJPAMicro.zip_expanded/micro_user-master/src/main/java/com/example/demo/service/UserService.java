@@ -42,7 +42,11 @@ public class UserService {
 		return user;
 
 	}
-
+    
+	public User getUserByUname(String uname, String token) {
+		return client.getUserByUname(token, uname);
+	}
+	
 	public Flight searchFlights(String source, String destination, String token) {
 		String uri = "http://localhost:8081/flights";
 //		ResponseEntity<Flight[]> response = restTemplate.getForEntity(uri, Flight[].class);

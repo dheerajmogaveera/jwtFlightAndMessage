@@ -103,6 +103,7 @@ public class DemoController {
 			mav.addObject("email", user.getUname());
 			// mav.addObject("id",us.login(user.getEmail(),user.getPassword()).getId());
 			session.setAttribute("token", token);
+			session.setAttribute("user", us.getUserByUname(user.getUname(), (String) token));
 			mav.setViewName("UserHome");
 			return mav;
 		} else {
@@ -121,15 +122,15 @@ public class DemoController {
 	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
-	public ModelAndView bookTicket(@ModelAttribute("id") int flightId, @ModelAttribute("noOfSeats") int nof,
-			HttpSession session) {
+	public ModelAndView bookTicket(@ModelAttribute("id") int flightId, @ModelAttribute("noOfSeats") int nof,HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		if (session.getAttribute("token") == null) {
 			mav.addObject("error", "Booking can only be acessed after logging in");
 			mav.setViewName("login");
 			return mav;
 		}
-		Booking booking = us.bookTicket(0,nof,flightId,(String) session.getAttribute("token"));
+		User u=(User)session.getAttribute("user");
+		Booking booking = us.bookTicket(u.getId(),nof,flightId,(String) session.getAttribute("token"));
 		mav.addObject("amt", booking.getTotalAmount());
 		mav.addObject("msg", "Ticket Booked Sucessfully");
 		mav.setViewName("BookTicket");

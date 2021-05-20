@@ -35,13 +35,16 @@ public class MainController {
 	private UserDetailsService userDetailsService;
 	@Autowired
 	UserService us;
-	
 	@Autowired 
 	UserRepository ur;
 
 	@GetMapping("/")
 	public String hello() {
 		return "Hello World";
+	}
+	@GetMapping("/get-user-by-uname")
+	public User hello(@RequestParam String uname) {
+		return ur.findByUname(uname);
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
