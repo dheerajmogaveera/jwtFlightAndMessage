@@ -3,7 +3,10 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+.metadata
+eclipse-workspace.zip_expanded
+JWT_MICROSERVICE_EXAMPLE.zip_expanded
+MessageJPA.zip_expanded
 ### STS ###
 .apt_generated
 .classpath
